@@ -2,15 +2,15 @@ import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import Navbar from "@/components/Navbar";
 
-export const metadata = { title: "Event Management App" };
+export const metadata = { title: "EventNest" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-gray-50 min-h-screen">
         <AuthProvider>
           <Navbar />
-          <main>{children}</main>
+          <main className="p-4">{children}</main>
         </AuthProvider>
       </body>
     </html>

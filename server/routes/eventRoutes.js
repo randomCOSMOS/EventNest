@@ -7,10 +7,11 @@ const { requireAdmin } = require('../middleware/adminMiddleware');
 // Public
 router.get('/', eventController.getEvents);
 router.get('/:id', eventController.getEvent);
+router.get('/:id/participants', authenticateToken, eventController.getParticipantsForEvent);
 
 // Admin only
-router.post('/', authenticateToken, requireAdmin, eventController.createEvent);
-router.put('/:id', authenticateToken, requireAdmin, eventController.updateEvent);
-router.delete('/:id', authenticateToken, requireAdmin, eventController.deleteEvent);
+router.post('/', authenticateToken, eventController.createEvent);
+router.put('/:id', authenticateToken, eventController.updateEvent);
+router.delete('/:id', authenticateToken, eventController.deleteEvent);
 
 module.exports = router;

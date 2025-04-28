@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { setAuthToken } from "@/lib/api";
 
 type User = { id: number; email: string; is_admin: boolean };
 type AuthContextType = {
@@ -21,6 +22,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (t && u) {
       setToken(t);
       setUser(JSON.parse(u));
+      setAuthToken(t);
     }
   }, []);
 
@@ -29,6 +31,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(user);
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(user));
+    setAuthToken(token);
   };
 
   const logout = () => {
@@ -36,12 +39,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    setAuthToken(null);
   };
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
-    </AuthContext.Provider>
+      </AuthContext.Provider>
   );
 }
 
