@@ -9,7 +9,12 @@ exports.createEvent = async ({ title, description, location, date, price, create
 };
 
 exports.getAllEvents = async () => {
-  const res = await pool.query('SELECT * FROM events ORDER BY date DESC');
+  const res = await pool.query(`
+    SELECT e.*, 
+      (SELECT COUNT(*) FROM bookings b WHERE b.event_id = e.id) AS participant_count
+    FROM events e
+    ORDER BY date DESC
+  `);
   return res.rows;
 };
 

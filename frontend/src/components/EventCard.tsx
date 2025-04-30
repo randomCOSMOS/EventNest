@@ -9,6 +9,9 @@ export default function EventCard({ event, onBook }: { event: any, onBook?: () =
       <div className="text-gray-500">{new Date(event.date).toLocaleString()}</div>
       <div className="text-gray-500">{event.location}</div>
       <div className="text-gray-700">₹{event.price}</div>
+      <div className="text-sm text-gray-600">
+        Participants: {event.participant_count || 0}
+      </div>
       <div className="flex gap-2 mt-2">
         {onBook && <Button onClick={onBook}>Book</Button>}
         <Link href={`/events/${event.id}`} className="text-blue-600 hover:underline text-sm">Details</Link>

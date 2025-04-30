@@ -57,8 +57,6 @@ exports.getParticipantsForEvent = async (req, res) => {
   res.json(bookingsRes.rows);
 };
 
-
-
 exports.updateEvent = async (req, res) => {
   try {
     const event = await eventModel.updateEvent(req.params.id, req.body);

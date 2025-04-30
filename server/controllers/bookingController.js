@@ -7,6 +7,9 @@ exports.createBooking = async (req, res) => {
     const booking = await bookingModel.createBooking({ user_id: req.user.id, event_id, paid: true });
     res.status(201).json(booking);
   } catch (err) {
+    if (err.code === '23505') { // unique_violation
+      return res.status(400).json({ message: "You have already booked this event." });
+    }
     res.status(500).json({ message: err.message });
   }
 };

@@ -5,6 +5,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { api, setAuthToken } from "@/lib/api";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { signIn } from "next-auth/react"
 
 export default function LoginPage() {
   const [email, setEmail] = useState(""); const [password, setPassword] = useState("");
@@ -35,6 +36,9 @@ export default function LoginPage() {
       <div className="text-sm text-center mt-2">
         Don't have an account? <a href="/auth/register" className="text-blue-600 hover:underline">Sign Up</a>
       </div>
+      <Button type="button" className="w-full mt-2" onClick={() => signIn("google")}>
+        Sign in with Google
+      </Button>
     </form>
   );
 }
